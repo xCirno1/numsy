@@ -7,8 +7,9 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .datatype import Maybe_RO
 
+class BaseSolverError(Exception): ...
 
-class SolutionNotFoundError(Exception):
+class SolutionNotFoundError(BaseSolverError):
     def __init__(self, equation: Maybe_RO):
         self.equation = equation
         self.recursion_limit = sys.getrecursionlimit()
@@ -29,3 +30,18 @@ class InvalidMatrixOperation(BaseMatrixError):
 class NonInvertibleMatrixError(BaseMatrixError):
     def __init__(self) -> None:
         super().__init__(f"Cannot inverse matrix with a determinant of 0 (singular matrix).")
+
+class BaseStatisticsError(Exception): ...
+
+class EmptyDataError(BaseStatisticsError):
+    def __init__(self) -> None:
+        super().__init__(f"Cannot process empty data.")
+
+class InsufficientDataError(BaseStatisticsError):
+    def __init__(self, data_points: int) -> None:
+        super().__init__(f"Expected at least {data_points} data points.")
+
+
+class SlicingError(BaseStatisticsError):
+    def __init__(self, slices: int, size: int) -> None:
+        super().__init__(f"Cannot perform {slices} slices with {size} elements.")

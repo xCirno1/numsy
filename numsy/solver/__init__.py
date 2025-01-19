@@ -5,8 +5,7 @@ from numsy.parser import gts
 from .utility import determine_equation_type, clean_equation
 from .datatype import CompleteEquation
 from .logging import set_log_equation, setup_log, _log
-from .matrices import *
-from .errors import *
+from . import errors, statistics, matrices
 
 def solve(equation: CompleteEquation | str) -> Result:
     log_equation = gts(equation) if isinstance(equation, list) else equation
