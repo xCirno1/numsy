@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from typing import TYPE_CHECKING
 
 from .utility import match_parentheses
 from .errors import UnmatchedParenthesis, ParseError
@@ -21,6 +22,8 @@ from .objects import (
     NotEquals
 )
 
+if TYPE_CHECKING:
+    from numsy.solver.datatype import CompleteEquation
 
 def verify_type(character: str):
     if character.isdigit():
@@ -82,7 +85,7 @@ def replace_to_valid_RO(string: str):
 
 
 def parse_group(string: str, provided_group: Group | None = None, last_object: object = None,
-                groups_only: bool = False, start_from: int = 0, _from_recursion: bool = False):
+                groups_only: bool = False, start_from: int = 0, _from_recursion: bool = False) -> CompleteEquation:
     if not _from_recursion:  # Slight performance
         string = replace_to_valid_RO(string)
         check_integrity(string)

@@ -1,3 +1,5 @@
+from math import isclose
+
 import pytest
 
 from numsy.solver.errors import NonInvertibleMatrixError
@@ -208,7 +210,7 @@ def test_matrix_norm():
 
 def test_matrix_condition_number():
     assert Matrix(m2).condition_number() == 224.0
-    assert Matrix(m6).condition_number() == 3891.848101265823
+    assert isclose(Matrix(m6).condition_number(), 3891.848101265823)
 
 def test_matrix_hadamard_product():
     assert Matrix(m3).hadamard_product(Matrix(m3)).matrix == [[1, 4, 9, 16], [25, 36, 49, 64]]

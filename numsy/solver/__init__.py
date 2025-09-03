@@ -5,12 +5,14 @@ from numsy.parser import gts
 from .utility import determine_equation_type, clean_equation
 from .datatype import CompleteEquation
 from .logging import set_log_equation, setup_log, _log
-from . import errors, statistics, matrices
+from . import errors, statistics, matrices, calculus
+
 
 def solve(equation: CompleteEquation | str) -> Result:
     log_equation = gts(equation) if isinstance(equation, list) else equation
     set_log_equation(log_equation)
     _log.info("Solving equation '%s'", log_equation)
+
     if isinstance(equation, str):
         equation = parse_group(equation)
         _log.info("Finished parsing equation, got '%s'", gts(equation))

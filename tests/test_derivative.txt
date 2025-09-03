@@ -1,0 +1,29 @@
+# CONSTANT
+0 == 0
+2 == 0
+
+# BASIC
+6x == 6
+4x^2 == 8x
+4x^4 + 3 == 16x^3
+17x^3 + 5x == 51x^2 + 5
+-5x^3 - 2x^3 == -15x^2 -6x^2
+2x^(-2) - x^(-3) == -4x^-3 + 3x^-4
+
+# DERIVATIVE OF DERIVATIVE OF ...
+17x^3 - 5x == 102x, n=2
+x^3 - 5x + 3 == 0, n=8
+
+# MULTIPLE VARIABLES
+3x^5 + 2y + 3 == 15x^4 + 2y
+
+# DECIMAL
+2.1x^3 + 1.5x == 6.3x^2 + 1.5
+
+# FRACTIONS
+1/x == -x^-2
+1/2x^2 == -x^-3
+5/4x^3 == -15/4 * x^-4
+
+# CHAIN RULE
+(4x^3 + 2x)^2 == 2 * (4x^3 + 2x) * (12x^2 + 2)

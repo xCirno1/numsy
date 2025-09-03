@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 from functools import cached_property
 from itertools import chain
 from typing import TYPE_CHECKING, ClassVar
@@ -240,6 +241,11 @@ class Group:
         new.number.value = coefficient
         return new
 
+    def invert_neg(self):
+        new = self.copy()
+        new.number.is_negative = not self.number.is_negative
+        return new
+
     def __repr__(self):
         return f"<Group number={self.number} variable={self.variable} power={self.power}>"
 
@@ -298,12 +304,37 @@ class ParenthesizedGroup:
 
 
 class Fraction:
+    # TODO: The numerator and denominator is actually either Group or ParenthesizedGroup so we need to fix the typehint
     def __init__(self, numerator: No_RO, denominator: No_RO):
         self.numerator = numerator
         if isinstance(deno := denominator[0], Group) and deno.number.value == 0:
             # This is only raised when the denominator is given explicitly as zero, we don't raise in case of 1/(2 - 2)
             raise ZeroDivisionError("Fraction denominator cannot be 0.")
         self.denominator = denominator
+
+    def resolve(self):
+        """Simplifies the fraction.
+        - Returns Group of the value 1 if both numerator and denominator are equal
+        - Else return the simplified Fraction by a common factor between numerator and denominator.
+        """
+        if self.numerator[0] == self.denominator[0]:
+            return Group.from_value(Decimal(1))
+        if self.numerator[0] == self.denominator[0].invert_neg():
+            return Group.from_value(Decimal(-1))
+
+        elif isinstance(self.numerator[0], Group) and isinstance(self.denominator[0], Group):
+            from numsy.solver.solve_algebra import get_common_factors
+            factor = get_common_factors([self.numerator[0], self.denominator[0]])
+            if factor != 1:
+                self.numerator[0].number.value /= factor
+                self.denominator[0].number.value /= factor
+                self.resolve()
+
+        return self
+
+    @property
+    def contains_variable(self):
+        return any(group.contains_variable for group in (self.numerator + self.denominator) if isinstance(group, (Group, ParenthesizedGroup)))
 
     def __repr__(self):
         return f"<Fraction numerator={[group for group in self.numerator]} denominator={[group for group in self.denominator]}>"
@@ -314,6 +345,16 @@ class Fraction:
     def __hash__(self):
         return id(self)  # Not good
 
-    @property
-    def contains_variable(self):
-        return any(group.contains_variable for group in (self.numerator + self.denominator) if isinstance(group, (Group, ParenthesizedGroup)))
+    def __mul__(self, other):
+        if isinstance(other, Fraction):
+            self.numerator[0] *= other.numerator[0].number.value
+            self.denominator[0] *= other.denominator[0].number.value
+        elif isinstance(other, (Group, ParenthesizedGroup)):
+            new = []
+            for group in self.numerator:
+                if isinstance(group, (Group, Fraction, ParenthesizedGroup)):
+                    new.append(group * other)
+                else:
+                    new.append(group)
+            self.numerator = new
+        return self
