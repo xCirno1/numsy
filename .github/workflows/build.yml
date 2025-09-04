@@ -20,12 +20,14 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
+      - name: Install Visual Studio Build Tools
+        uses: microsoft/setup-msbuild@v2
 
       - name: Install cibuildwheel
         run: pip install cibuildwheel
 
       - name: Build wheels
-        run: python -m cibuildwheel --output-dir dist --verbose
+        run: python -m cibuildwheel --output-dir dist
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
