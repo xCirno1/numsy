@@ -27,11 +27,12 @@ jobs:
       - name: Build wheels
         run: python -m cibuildwheel --output-dir dist
 
-      - name: Upload wheels (artifact)
+      - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels
+          name: wheels-${{ matrix.os }}
           path: dist/*
+          if-no-files-found: warn
 
   publish:
     needs: build_wheels
