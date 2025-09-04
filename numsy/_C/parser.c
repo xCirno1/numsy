@@ -21,7 +21,7 @@ static PyMethodDef FputsMethods[] = {
 };
 
 
-static struct PyModuleDef fputsmodule = {
+static struct PyModuleDef parsermodule = {
     PyModuleDef_HEAD_INIT,
     "parser",
     "Python interface for the fputs C library function",
@@ -29,6 +29,6 @@ static struct PyModuleDef fputsmodule = {
     FputsMethods
 };
 
-PyMODINIT_FUNC PyInit_fputs(void) {
-    return PyModule_Create(&fputsmodule);
+PyMODINIT_FUNC PyInit_parser(void) {
+    return PyModule_Create(&parsermodule);
 }
