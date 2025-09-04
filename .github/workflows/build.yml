@@ -34,22 +34,22 @@ jobs:
           path: dist/*
           if-no-files-found: warn
 
-publish:
-  needs: build_wheels
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/download-artifact@v4
-      with:
-        path: wheels
+  publish:
+    needs: build_wheels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: wheels
 
-    - name: Merge all wheels into dist
-      run: |
-        mkdir -p dist
-        cp wheels/*/* dist/
+      - name: Merge all wheels into dist
+        run: |
+          mkdir -p dist
+          cp wheels/*/* dist/
 
-    - name: Publish to TestPyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        user: __token__
-        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        repository-url: https://test.pypi.org/legacy/
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/
