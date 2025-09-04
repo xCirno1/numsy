@@ -1,3 +1,5 @@
+Test push
+
 # NumSy
 Welcome to NumSy, a project designed to ensure precise and accurate mathematical calculations. This is an independent project, which eliminates the need for any additional libraries. Our primary goal is to provide users with an easy-to-use platform for solving math problems. We highly welcome your feedback, suggestions, and contributions, so please don't hesitate to create issues or pull requests.
 
