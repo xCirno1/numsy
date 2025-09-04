@@ -25,7 +25,7 @@ jobs:
         run: pip install cibuildwheel
 
       - name: Build wheels
-        run: python -m cibuildwheel --output-dir dist
+        run: python -m cibuildwheel --output-dir dist --verbose
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
