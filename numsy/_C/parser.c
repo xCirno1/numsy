@@ -23,7 +23,7 @@ static PyMethodDef FputsMethods[] = {
 
 static struct PyModuleDef fputsmodule = {
     PyModuleDef_HEAD_INIT,
-    "fputs",
+    "parser",
     "Python interface for the fputs C library function",
     -1,
     FputsMethods
