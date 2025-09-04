@@ -28,7 +28,7 @@ jobs:
         run: python -m cibuildwheel --output-dir dist
 
       - name: Upload wheels (artifact)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: wheels
           path: dist/*
@@ -37,7 +37,7 @@ jobs:
     needs: build_wheels
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: wheels
           path: dist
