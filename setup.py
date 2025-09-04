@@ -7,5 +7,5 @@ setup(
     author="xCirno1",
     author_email="xcirno6@gmail.com",
     packages=["numsy._C"],
-    ext_modules=[Extension("fputs", ["numsy/_C/parser.c"])]
+    ext_modules=[Extension("parser", ["numsy/_C/parser.c"])]
 )
