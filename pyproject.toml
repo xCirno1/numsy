@@ -4,12 +4,15 @@ version = "0.1.1"
 description = "Providing a powerful and accurate Math Solver."
 readme = "readme.md"
 authors = [{ name = "xCirno1", email = "xcirno6@gmail.com" }]
-license = { file = "LICENSE" }
+license-files = ["LICENSE"]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
 ]
 requires-python = ">= 3.10"
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project.urls]
 Documentation = "https://github.com/xCirno1/numsy"
