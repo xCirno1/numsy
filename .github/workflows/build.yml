@@ -3,7 +3,7 @@ name: Test build wheels
 on:
   push:
     branches:
-      - build-test   # only run on build-test branch
+      - c-parser
 
 jobs:
   build_wheels:
