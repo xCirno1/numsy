@@ -1,11 +1,16 @@
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 
 setup(
-    name="fputs",
-    version="1.0.0",
+    name="numsy",
+    version="0.1.2",
     description="Providing a powerful and accurate Math Solver.",
     author="xCirno1",
     author_email="xcirno6@gmail.com",
-    packages=["numsy._C"],
-    ext_modules=[Extension("parser", ["numsy/_C/parser.c"])]
+    packages=find_packages(include=["numsy", "numsy.*"]),
+    ext_modules=[
+        Extension(
+            "numsy._C.parser",            # fully qualified import path
+            ["numsy/_C/parser.c"]         # source file
+        )
+    ],
 )
