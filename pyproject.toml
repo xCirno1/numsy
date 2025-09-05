@@ -1,6 +1,6 @@
 [project]
 name = "numsy"
-version = "0.1.1"
+version = "0.1.1-alpha.1"
 description = "Providing a powerful and accurate Math Solver."
 readme = "readme.md"
 authors = [{ name = "xCirno1", email = "xcirno6@gmail.com" }]
@@ -15,7 +15,8 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Documentation = "https://github.com/xCirno1/numsy"
+Homepage = "https://xcirno.xyz/"
+Source = "https://github.com/xCirno1/numsy"
 Issues = "https://github.com/xCirno1/numsy/issues"
 
 [tool.setuptools.packages.find]
